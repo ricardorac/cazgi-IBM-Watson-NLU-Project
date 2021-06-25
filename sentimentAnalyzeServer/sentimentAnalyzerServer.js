@@ -31,19 +31,86 @@ app.get("/",(req,res)=>{
   });
 
 app.get("/url/emotion", (req,res) => {
+    const analyzeParams = {
+        'url': req.query.url,
+        'features': {
+            'keywords': {
+                'emotion': true,
+                'limit': 1,
+            },
+        }
+    };
 
+    getNLUInstance().analyze(analyzeParams)
+    .then(analysisResults => {
+        console.log(JSON.stringify(analysisResults, null, 2));
+    })
+    .catch(err => {
+        console.log('error:', err);
+    });
     return res.send({"happy":"90","sad":"10"});
 });
 
 app.get("/url/sentiment", (req,res) => {
+   const analyzeParams = {
+        'url': req.query.url,
+        'features': {
+            'keywords': {
+                'sentiment': true,
+                'limit': 1,
+            },
+        }
+    };
+
+    getNLUInstance().analyze(analyzeParams)
+    .then(analysisResults => {
+        console.log(JSON.stringify(analysisResults, null, 2));
+    })
+    .catch(err => {
+        console.log('error:', err);
+    });
     return res.send("url sentiment for "+req.query.url);
 });
 
 app.get("/text/emotion", (req,res) => {
+   const analyzeParams = {
+        'text': req.query.text,
+        'features': {
+            'keywords': {
+                'emotion': true,
+                'limit': 1,
+            },
+        }
+    };
+
+    getNLUInstance().analyze(analyzeParams)
+    .then(analysisResults => {
+        console.log(JSON.stringify(analysisResults, null, 2));
+    })
+    .catch(err => {
+        console.log('error:', err);
+    });
     return res.send({"happy":"10","sad":"90"});
 });
 
 app.get("/text/sentiment", (req,res) => {
+    const analyzeParams = {
+        'text': req.query.text,
+        'features': {
+            'keywords': {
+                'sentiment': true,
+                'limit': 1,
+            },
+        }
+    };
+
+    getNLUInstance().analyze(analyzeParams)
+    .then(analysisResults => {
+        console.log(JSON.stringify(analysisResults, null, 2));
+    })
+    .catch(err => {
+        console.log('error:', err);
+    });
     return res.send("text sentiment for "+req.query.text);
 });
 
